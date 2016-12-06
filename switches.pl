@@ -171,7 +171,7 @@ unshift @out, @helpf;
 
 unshift @out, <<SWFN_HELP_CODE1;
 
-BOOL SWFN_HELP( char* szUsage )
+BOOL SWFN_HELP( const char* szUsage )
 {
 if ( szUsage )
 	printf( "%s\\n", szUsage );

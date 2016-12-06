@@ -136,6 +136,7 @@ CDos2DirEntry* CDos2::CreateEntry( DOS2_DIRENT* pDire, WORD wEntry )
 BOOL CDos2::ExportFile( char* szOutFile, CDirEntry* pDirE )
 {
 	int hOutfile = -1;
+	int err;
 
 	if ( szOutFile )
 	{
@@ -201,8 +202,10 @@ BOOL CDos2::ExportFile( char* szOutFile, CDirEntry* pDirE )
 		}
 
 
-		if ( -1 != hOutfile )
-			write( hOutfile, abtBuff, abtBuff[ wSectorSize - 1 ] );
+		if ( -1 != hOutfile ) {
+			err = write( hOutfile, abtBuff, abtBuff[ wSectorSize - 1 ] );
+			if (err < 0) return FALSE;
+		}
 
 		wCount--;
 	}

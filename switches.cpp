@@ -1,18 +1,3 @@
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or
-//    any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-//
-
 //THIS IS A GENERATED FILE. DO NOT EDIT!!!
 //EDIT switches.def INSTEAD!
 
@@ -53,21 +38,24 @@ BOOL SWITCHES_GetValue()
 }
 
 
-BOOL SWFN_HELP( char* szUsage )
+BOOL SWFN_HELP( const char* szUsage )
 {
 	if ( szUsage )
 		printf( "%s\n", szUsage );
-	printf( "-help      -this help\n" );
-	printf( "-dos2      -mount as Dos2\n" );
-	printf( "-dos3      -mount as Dos3\n" );
-	printf( "-mydos     -mount as MyDos\n" );
-	printf( "-spdos     -mount as SpartaDos\n" );
-	printf( "-kboot     -mount as Kboot\n" );
-	printf( "-jonw      -mount as JonW\n" );
-	printf( "-howf      -mount as HowFen Dos\n" );
-	printf( "-boot      -mount as boot\n" );
-	printf( "-e         -export files\n" );
-	printf( "-dir path  -export to directory\n" );
+	printf( "-help         -this help\n" );
+	printf( "-dos2         -mount as Dos2\n" );
+	printf( "-dos3         -mount as Dos3\n" );
+	printf( "-mydos        -mount as MyDos\n" );
+	printf( "-spdos        -mount as SpartaDos\n" );
+	printf( "-kboot        -mount as Kboot\n" );
+	printf( "-bas2boot     -mount as Bas2Boot\n" );
+	printf( "-jonw         -mount as JonW\n" );
+	printf( "-robc         -mount as RobC\n" );
+	printf( "-howf         -mount as HowFen Dos\n" );
+	printf( "-boot         -mount as boot\n" );
+	printf( "-e            -export files\n" );
+	printf( "-dir path     -export to directory\n" );
+	printf( "-dontrepair   -don't repair invalid files automatically\n" );
 	return FALSE;
 }
 
@@ -143,9 +131,19 @@ BOOL SWITCHES_Init( int* pargc, char** argv )
 				g_dostype = DOS_KBOOT;
 				continue;
 			}
+			if (!strcmp( m_szSwitch, "bas2boot" ) || !strcmp( m_szSwitch, "b2b" ))
+			{
+				g_dostype = DOS_B2B;
+				continue;
+			}
 			if (!strcmp( m_szSwitch, "jonw" ))
 			{
 				g_dostype = DOS_JONW;
+				continue;
+			}
+			if (!strcmp( m_szSwitch, "robc" ))
+			{
+				g_dostype = DOS_ROBC;
 				continue;
 			}
 			if (!strcmp( m_szSwitch, "howf" ) || !strcmp( m_szSwitch, "howfen" ))
@@ -166,6 +164,11 @@ BOOL SWITCHES_Init( int* pargc, char** argv )
 			if (!strcmp( m_szSwitch, "dir" ))
 			{
 				bRet = SWFN_GETPATH( g_szPath );
+				continue;
+			}
+			if (!strcmp( m_szSwitch, "dontrepair" ))
+			{
+				g_bRepairAuto = FALSE;
 				continue;
 			}
 			

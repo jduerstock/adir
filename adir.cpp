@@ -52,7 +52,7 @@ BOOL CheckMask( char* szFname, char* szMask );
 void MakePath( char* szDest, char* szDir, char* szFileName );
 BOOL InitializeFs( DOS_TYPE dostype, BOOL bVerbose );
 BOOL SWFN_DOST( void* );
-char* GetFSName( DOS_TYPE dostype );
+const char* GetFSName( DOS_TYPE dostype );
 
 BOOL g_bIsMyDos = FALSE;
 BOOL g_bToLower = FALSE;
@@ -80,8 +80,8 @@ CFs* g_pFs;
 
 #include "switches.cpp"
 
-#include <crt0.h>
-int _crt0_startup_flags = _CRT0_FLAG_PRESERVE_FILENAME_CASE;
+// #include <crt0.h>
+// int _crt0_startup_flags = _CRT0_FLAG_PRESERVE_FILENAME_CASE;
 
 int main(int argc,char *argv[])
 {
@@ -440,13 +440,13 @@ void MakePath( char* szDest, char* szDir, char* szFileName )
 
 BOOL SWFN_DOST( void* p )
 {
-	g_dostype = (DOS_TYPE)(int)p;
+	g_dostype = (DOS_TYPE)(long)p;
 
 	return TRUE;
 }
 
 //returns ptr to filesystem name
-char* GetFSName( DOS_TYPE dostype )
+const char* GetFSName( DOS_TYPE dostype )
 {
 	switch( dostype )
 	{

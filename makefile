@@ -1,9 +1,9 @@
 #=====================================================================
 PRGNAME		= adir
-#DEL = rm -f
-#DELTREE = rm -rf
-DEL = del
-DELTREE = deltree /y
+DEL = rm -f
+DELTREE = rm -rf
+#DEL = del
+#DELTREE = deltree /y
 
 release:
 	@$(MAKE) $(PRGNAME) CFLAGS="-c -O2 -Wall" LDFLAGS=""
@@ -86,7 +86,7 @@ OBJECTS =       			\
 
 #=====================================================================
 CC		= gcc
-LD		= gcc
+LD		= g++
 LDLIBS		= -lm
 
 #=====================================================================

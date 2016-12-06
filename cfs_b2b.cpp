@@ -107,6 +107,7 @@ CBas2BootDirEntry* CBas2Boot::CreateEntry()
 BOOL CBas2Boot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 {
 	int hOutfile = -1;
+	int err;
 
 	if ( szOutFile )
 	{
@@ -126,8 +127,10 @@ BOOL CBas2Boot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	int iSector = 3;
 
 	m_pDisk->ReadSector( abtBuff, 2 );
-	if ( -1 != hOutfile )
-		write( hOutfile, abtBuff + 0x72, 0x0E );
+	if ( -1 != hOutfile ) {
+		err = write( hOutfile, abtBuff + 0x72, 0x0E );
+		if (err < 0) return FALSE;
+	}
 
 	dwFileLen -= 0xE;
 
@@ -141,8 +144,10 @@ BOOL CBas2Boot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 			return FALSE;
 		}
 
-		if ( -1 != hOutfile )
-			write( hOutfile, abtBuff, wToCopy );
+		if ( -1 != hOutfile ) {
+			err = write( hOutfile, abtBuff, wToCopy );
+			if (err < 0) return FALSE;
+		}
 
 		dwFileLen -= wToCopy;
 		iSector++;

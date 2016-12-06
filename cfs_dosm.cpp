@@ -161,6 +161,7 @@ CDosMDirEntry* CDosM::CreateEntry( DOSM_DIRENT* pDire )
 BOOL CDosM::ExportFile( char* szOutFile, CDirEntry* pDirE )
 {
 	int hOutfile = -1;
+	int err;
 
 	if ( szOutFile )
 	{
@@ -217,8 +218,10 @@ BOOL CDosM::ExportFile( char* szOutFile, CDirEntry* pDirE )
 		else
 			wSector = abtBuff[ wSectorSize - 2 ] + ( 0x03 & (WORD)abtBuff[ wSectorSize - 3 ] ) * 0x100;
 
-		if ( -1 != hOutfile )
-			write( hOutfile, abtBuff, abtBuff[ wSectorSize - 1 ] );
+		if ( -1 != hOutfile ) {
+			err = write( hOutfile, abtBuff, abtBuff[ wSectorSize - 1 ] );
+			if (err < 0) return FALSE;
+		}
 
 		wCount--;
 	}

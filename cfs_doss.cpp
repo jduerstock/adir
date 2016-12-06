@@ -309,6 +309,7 @@ CDosSDirEntry* CDosS::CreateEntry( DOSS_DIRENT* pDire )
 BOOL CDosS::ExportFile( char* szOutFile, CDirEntry* pDirE )
 {
 	int hOutfile = -1;
+	int err;
 
 	if ( szOutFile )
 	{
@@ -331,8 +332,10 @@ BOOL CDosS::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	 	return FALSE;
 	}
 
-	if ( -1 != hOutfile )
-		write( hOutfile, pDir, iLength );
+	if ( -1 != hOutfile ) {
+		err = write( hOutfile, pDir, iLength );
+		if (err < 0) return FALSE;
+	}
 
 	UnMapFile( pDir );
 

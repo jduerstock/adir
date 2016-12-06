@@ -140,6 +140,7 @@ CDos3DirEntry* CDos3::CreateEntry( DOS3_DIRENT* pDire )
 BOOL CDos3::ExportFile( char* szOutFile, CDirEntry* pDirE )
 {
 	int hOutfile = -1;
+	int err;
 
 	if ( szOutFile )
 	{
@@ -170,8 +171,10 @@ BOOL CDos3::ExportFile( char* szOutFile, CDirEntry* pDirE )
 			}
 		}
 
-		if ( -1 != hOutfile )
-			write( hOutfile, abtBuff, wToCopy );
+		if ( -1 != hOutfile ) {
+			err = write( hOutfile, abtBuff, wToCopy );
+			if (err < 0) return FALSE;
+		}
 
 		btSecCount--;
 		wFileLen -= wToCopy;

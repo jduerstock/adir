@@ -105,6 +105,7 @@ CKBootDirEntry* CKBoot::CreateEntry()
 BOOL CKBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 {
 	int hOutfile = -1;
+	int err;
 
 	if ( szOutFile )
 	{
@@ -133,8 +134,10 @@ BOOL CKBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 			return FALSE;
 		}
 
-		if ( -1 != hOutfile )
-			write( hOutfile, abtBuff, wToCopy );
+		if ( -1 != hOutfile ) {
+			err = write( hOutfile, abtBuff, wToCopy );
+			if (err < 0) return FALSE;
+		}
 
 		dwFileLen -= wToCopy;
 		iSector++;

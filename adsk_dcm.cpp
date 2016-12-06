@@ -760,5 +760,5 @@ void CDcm::EncodeRec44( BYTE* pbtDest, int* piDestLen, BYTE* pbtSrc, BYTE* pbtSr
 	*piDestLen = pbtD - pbtDest;
 }
 
-#endif __CDISK_SAVE__
+#endif // __CDISK_SAVE__
 

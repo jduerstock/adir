@@ -137,7 +137,7 @@ void ForceClassicSize( int iSectors, int iSectorSize, DISK_GEOMETRY* pGeometry )
 
 
 //returns ptr to disk type name
-char* GetDiskTypeName( DISK_TYPE disktype )
+const char* GetDiskTypeName( DISK_TYPE disktype )
 {
 	switch( disktype )
 	{
@@ -168,7 +168,7 @@ char* GetDiskTypeName( DISK_TYPE disktype )
 }
 
 //returns ptr to disk type extension
-char* GetDiskTypeExt( DISK_TYPE disktype )
+const char* GetDiskTypeExt( DISK_TYPE disktype )
 {
 	switch( disktype )
 	{

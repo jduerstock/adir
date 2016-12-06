@@ -77,7 +77,7 @@ typedef long SDWORD;
 typedef WORD WCHAR;
 typedef CHAR TCHAR;
 
-typedef WORD wchar_t;
+// typedef WORD wchar_t;
 
 typedef const char* LPCSTR;
 typedef const WCHAR* LPCWSTR;

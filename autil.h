@@ -19,8 +19,8 @@
 #include "wintypes.h"
 
 void ADos2MsDos( char*, char* );
-void GuessBestFnameFromPC( char* szDest, char* szSrc, char* szExt, char* szAdd = NULL );
-void GuessBestFnameFromAtari( char* szDest, char* szSrc, char* szExt );
+void GuessBestFnameFromPC( char* szDest, char* szSrc, const char* szExt, const char* szAdd = NULL );
+void GuessBestFnameFromAtari( char* szDest, char* szSrc, const char* szExt );
 
 BOOL IsBlockEmpty( BYTE*, int );
 

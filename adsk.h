@@ -59,8 +59,8 @@ void GuessClassicSizes( int, int, DISK_GEOMETRY* );
 void ForceClassicSize( int, int, DISK_GEOMETRY* );
 void ForceClassicSize( DISK_GEOMETRY* );
 
-char* GetDiskTypeName( DISK_TYPE disktype );
-char* GetDiskTypeExt( DISK_TYPE disktype );
+const char* GetDiskTypeName( DISK_TYPE disktype );
+const char* GetDiskTypeExt( DISK_TYPE disktype );
 
 DISKINIT_RETCODE InitializeDisk( ADisk**, DISK_TYPE, char*, BOOL bVerbose, BOOL, BOOL );
 

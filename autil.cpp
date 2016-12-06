@@ -85,7 +85,7 @@ void Peecize( char* szPC, char* szAtari )
 
 
 //converts any Atari name to it's PC equivalent
-void GuessBestFnameFromAtari( char* szDest, char* szSrc, char* szExt )
+void GuessBestFnameFromAtari( char* szDest, char* szSrc, const char* szExt )
 {
 	char szTemp[ 255 ];
 	Peecize( szTemp, szSrc );
@@ -93,7 +93,7 @@ void GuessBestFnameFromAtari( char* szDest, char* szSrc, char* szExt )
 }
 
 //changes file extension
-void GuessBestFnameFromPC( char* szDest, char* szSrc, char* szExt, char* szAdd )
+void GuessBestFnameFromPC( char* szDest, char* szSrc, const char* szExt, const char* szAdd )
 {
 	char szTemp[ 255 ];
 
