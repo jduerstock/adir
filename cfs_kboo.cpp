@@ -65,7 +65,7 @@ CKBootDirEntry* CKBoot::CreateEntry()
 
 	if ( !m_pDisk->ReadSector( abtSec, 1 ) )
 	{
-		sprintf( m_szLastError, "KBOOT: Can't read boot sector because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "KBOOT: Can't read boot sector because\n%.256s", m_pDisk->GetLastError() );
 		delete pE;
 		return NULL;
 	}
@@ -74,7 +74,7 @@ CKBootDirEntry* CKBoot::CreateEntry()
 
 	if ( !m_pDisk->ReadSector( abtSec, 4 ) )
 	{
-		sprintf( m_szLastError, "KBOOT: Can't read first post boot sector because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "KBOOT: Can't read first post boot sector because\n%.256s", m_pDisk->GetLastError() );
 		delete pE;
 		return NULL;
 	}
@@ -113,7 +113,7 @@ BOOL CKBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( -1 == hOutfile )
 		{
-			sprintf( m_szLastError, "KBOOT: Unable to create file '%s'!", szOutFile );
+			sprintf( m_szLastError, "KBOOT: Unable to create file '%.256s'!", szOutFile );
 			return FALSE;
 		}
 	}
@@ -130,7 +130,7 @@ BOOL CKBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( !m_pDisk->ReadSector( abtBuff, iSector ) )
 		{
-			sprintf( m_szLastError, "KBOOT: Can't read sector because\n%s", m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "KBOOT: Can't read sector because\n%.256s", m_pDisk->GetLastError() );
 			return FALSE;
 		}
 

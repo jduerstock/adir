@@ -66,7 +66,7 @@ BOOL CHowf::Mount( ADisk* pDisk )
 
 	if ( !m_pDisk->ReadSectors( abtSec, 0x1, 0xA ) )
 	{
-			sprintf( m_szLastError, "HOWF: Can't read directory because\n%s", m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "HOWF: Can't read directory because\n%.256s", m_pDisk->GetLastError() );
 			return FALSE;
 	}
 
@@ -157,7 +157,7 @@ BOOL CHowf::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( ( iStartSec + iSecCount - 1 ) > m_pDisk->GetSectorCount() )
 	{
-		sprintf( m_szLastError, "HOWF: File '%s' goes past last sector!", szOutFile );
+		sprintf( m_szLastError, "HOWF: File '%.256s' goes past last sector!", szOutFile );
 		return FALSE;
 	}
 
@@ -175,7 +175,7 @@ BOOL CHowf::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( !newdisk.Format( &dg ) )
 	{
-		sprintf( m_szLastError, "HOWF: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+		sprintf( m_szLastError, "HOWF: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 		return FALSE;
 	}
 
@@ -185,13 +185,13 @@ BOOL CHowf::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if( !m_pDisk->ReadSector( abtBuff, iStartSec++ ) )
 		{
-			sprintf( m_szLastError, "HOWF: File '%s' can't create because\n%s", szOutFile, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "HOWF: File '%.256s' can't create because\n%.256s", szOutFile, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
 		if ( !newdisk.WriteSector( iCurrSec++, abtBuff ) )
 		{
-			sprintf( m_szLastError, "HOWF: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+			sprintf( m_szLastError, "HOWF: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 			return FALSE;
 		}
 
@@ -200,7 +200,7 @@ BOOL CHowf::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( !newdisk.Save( szOutFile, FALSE ) )
 	{
-		sprintf( m_szLastError, "HOWF: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+		sprintf( m_szLastError, "HOWF: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 		return FALSE;
 	}
 

@@ -53,7 +53,7 @@ BOOL CDos2::Mount( ADisk* pDisk )
 
 		if ( !m_pDisk->ReadSector( abtSec, ROOT_DIR + ( wEntry / 8 ) ) )
 		{
-			sprintf( m_szLastError, "DOS2: Can't read directory entry %04X because\n%s", wEntry, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "DOS2: Can't read directory entry %04X because\n%.256s", wEntry, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
@@ -144,7 +144,7 @@ BOOL CDos2::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( -1 == hOutfile )
 		{
-			sprintf( m_szLastError, "DOS2: Unable to create file '%s'!", szOutFile );
+			sprintf( m_szLastError, "DOS2: Unable to create file '%.256s'!", szOutFile );
 			return FALSE;
 		}
 	}
@@ -162,19 +162,19 @@ BOOL CDos2::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if ( wSector < 1 )
 		{
-			sprintf( m_szLastError, "DOS2: Corrupted file '%s' (invalid sector %04X)", szOutFile, wSector );
+			sprintf( m_szLastError, "DOS2: Corrupted file '%.256s' (invalid sector %04X)", szOutFile, wSector );
 			return FALSE;
 		}
 
 		if ( ( abtBuff[ wSectorSize - 1 ] & 0x80 ) && ( wSectorSize == 0x80 ) )
 		{
-			sprintf( m_szLastError, "DOS2: Corrupted file '%s' (unexpected EOF)", szOutFile );
+			sprintf( m_szLastError, "DOS2: Corrupted file '%.256s' (unexpected EOF)", szOutFile );
 			return FALSE;
 		}
 
 		if ( !m_pDisk->ReadSector( abtBuff, wSector ) )
 		{
-			sprintf( m_szLastError, "DOS2: Corrupted file '%s'\n%s\n", szOutFile, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "DOS2: Corrupted file '%.256s'\n%.256s\n", szOutFile, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
@@ -197,7 +197,7 @@ BOOL CDos2::ExportFile( char* szOutFile, CDirEntry* pDirE )
 		{
 			WORD wFN = abtBuff[ wSectorSize - 3 ] >> 2;
 
-			sprintf( m_szLastError, "DOS2: Corrupted file '%s' (167: file number mismatch [%04X != %04X])", szOutFile, wFileNumber, wFN );
+			sprintf( m_szLastError, "DOS2: Corrupted file '%.256s' (167: file number mismatch [%04X != %04X])", szOutFile, wFileNumber, wFN );
 			return FALSE;
 		}
 
@@ -214,7 +214,7 @@ BOOL CDos2::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if ( ! ( abtBuff[ wSectorSize - 1 ] & 128 ) && ( wSectorSize == 128 ) && wSector)
 		{
-			sprintf( m_szLastError, "DOS2: Corrupted file '%s' (expected EOF, code %02X, next sector %04X)", szOutFile, abtBuff[ wSectorSize - 1 ], wSector );
+			sprintf( m_szLastError, "DOS2: Corrupted file '%.256s' (expected EOF, code %02X, next sector %04X)", szOutFile, abtBuff[ wSectorSize - 1 ], wSector );
 			return FALSE;
 		}
 	}

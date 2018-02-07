@@ -60,7 +60,7 @@ BOOL CDosM::ReadDir( int iSector, CDosMDirEntry** ppRoot )
 
 		if ( !m_pDisk->ReadSector( abtSec, iSector + ( wEntry / 8 ) ) )
 		{
-			sprintf( m_szLastError, "DOSM: Can't read directory entry %04X because\n%s", wEntry, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "DOSM: Can't read directory entry %04X because\n%.256s", wEntry, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
@@ -125,7 +125,7 @@ CDosMDirEntry* CDosM::CreateEntry( DOSM_DIRENT* pDire )
 	ADos2MsDos( pE->m_szFname, pDire->acAtariName );
 
 	sprintf( pE->m_szAscData, "%02X %04X %04X", pDire->btFlags, pDire->wSecStart, pDire->wSecCount );
-	//printf( "%02X %04X %04X %s\n", pDire->btFlags, pDire->wSecStart, pDire->wSecCount, pE->m_szFname );
+	//printf( "%02X %04X %04X %.256s\n", pDire->btFlags, pDire->wSecStart, pDire->wSecCount, pE->m_szFname );
 
 	pE->m_btFlags = pDire->btFlags;
 	pE->m_wSecStart = pDire->wSecStart;
@@ -169,7 +169,7 @@ BOOL CDosM::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( -1 == hOutfile )
 		{
-			sprintf( m_szLastError, "DOSM: Unable to create file '%s'!", szOutFile );
+			sprintf( m_szLastError, "DOSM: Unable to create file '%.256s'!", szOutFile );
 			return FALSE;
 		}
 	}
@@ -186,19 +186,19 @@ BOOL CDosM::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if ( wSector < 1 )
 		{
-			sprintf( m_szLastError, "DOSM: Corrupted file '%s' (invalid sector %04X)", szOutFile, wSector );
+			sprintf( m_szLastError, "DOSM: Corrupted file '%.256s' (invalid sector %04X)", szOutFile, wSector );
 			return FALSE;
 		}
 
 		if ( ( abtBuff[ wSectorSize - 1 ] & 0x80 ) && ( wSectorSize == 0x80 ) )
 		{
-			sprintf( m_szLastError, "DOSM: Corrupted file '%s' (unexpected EOF)", szOutFile );
+			sprintf( m_szLastError, "DOSM: Corrupted file '%.256s' (unexpected EOF)", szOutFile );
 			return FALSE;
 		}
 
 		if ( !m_pDisk->ReadSector( abtBuff, wSector ) )
 		{
-			sprintf( m_szLastError, "DOSM: Corrupted file '%s'\n%s\n", szOutFile, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "DOSM: Corrupted file '%.256s'\n%.256s\n", szOutFile, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
@@ -230,7 +230,7 @@ BOOL CDosM::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if ( ! ( abtBuff[ wSectorSize - 1 ] & 128 ) && ( wSectorSize == 128 ) && wSector)
 		{
-			sprintf( m_szLastError, "DOSM: Corrupted file '%s' (expected EOF, code %02X, next sector %04X)", szOutFile, abtBuff[ wSectorSize - 1 ], wSector );
+			sprintf( m_szLastError, "DOSM: Corrupted file '%.256s' (expected EOF, code %02X, next sector %04X)", szOutFile, abtBuff[ wSectorSize - 1 ], wSector );
 			return FALSE;
 		}
 	}

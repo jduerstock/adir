@@ -59,7 +59,7 @@ BOOL CDosS::Mount( ADisk* pDisk )
 
 	if ( !m_pDisk->GetBootSector( pBoot ) )
 	{
-		sprintf( m_szLastError, "DOSS: Can't read boot sector because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "DOSS: Can't read boot sector because\n%.256s", m_pDisk->GetLastError() );
 		delete [] pBoot;
 		return FALSE;
 	}
@@ -139,7 +139,7 @@ int CDosS::GetSectorLinkEntry( int iLink, int iSec )
 	{
 		if ( !m_pDisk->ReadSector( awSector, iCurrLink ) )
 		{
-			sprintf( m_szLastError, "DOSS: Can't read link sector because\n%s", m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "DOSS: Can't read link sector because\n%.256s", m_pDisk->GetLastError() );
 			return 0;
 		}
 
@@ -167,7 +167,7 @@ BOOL CDosS::ReadDir( int iSectorLink, CDosSDirEntry** ppRoot )
 
 	if ( !m_pDisk->ReadSector( abtSector, iSector ) )
 	{
-		sprintf( m_szLastError, "DOSS: Can't read dir because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "DOSS: Can't read dir because\n%.256s", m_pDisk->GetLastError() );
 		return FALSE;
 	}
 
@@ -317,7 +317,7 @@ BOOL CDosS::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( -1 == hOutfile )
 		{
-			sprintf( m_szLastError, "DOSS: Unable to create file '%s'!", szOutFile );
+			sprintf( m_szLastError, "DOSS: Unable to create file '%.256s'!", szOutFile );
 			return FALSE;
 		}
 	}
@@ -365,7 +365,7 @@ BYTE* CDosS::MapFile( int iLinkSector, int iLength )
 
 		if ( !m_pDisk->ReadSector( abtBuff, iSector ) )
 		{
-				sprintf( m_szLastError, "DOSS: Can't read file sector because\n%s", m_pDisk->GetLastError() );
+				sprintf( m_szLastError, "DOSS: Can't read file sector because\n%.256s", m_pDisk->GetLastError() );
 				delete [] pBuff;
 				return 0;
 		}

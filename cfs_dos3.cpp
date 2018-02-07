@@ -55,7 +55,7 @@ BOOL CDos3::Mount( ADisk* pDisk )
 
 	if ( !pDisk->ReadSector( m_abtFat, FAT ) )
 	{
-		sprintf( m_szLastError, "DOS3: Can't read FAT sector because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "DOS3: Can't read FAT sector because\n%.256s", m_pDisk->GetLastError() );
 		return FALSE;
 	}
 
@@ -65,7 +65,7 @@ BOOL CDos3::Mount( ADisk* pDisk )
 
 		if ( !pDisk->ReadSector( abtSec, ROOT_DIR + ( wEntry / 8 ) ) )
 		{
-			sprintf( m_szLastError, "DOS3: Can't read directory entry %04X because\n%s", wEntry, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "DOS3: Can't read directory entry %04X because\n%.256s", wEntry, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
@@ -148,7 +148,7 @@ BOOL CDos3::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( -1 == hOutfile )
 		{
-			sprintf( m_szLastError, "DOS3: Unable to create file '%s'!", szOutFile );
+			sprintf( m_szLastError, "DOS3: Unable to create file '%.256s'!", szOutFile );
 			return FALSE;
 		}
 	}
@@ -166,7 +166,7 @@ BOOL CDos3::ExportFile( char* szOutFile, CDirEntry* pDirE )
 		if ( !m_pDisk->ReadSectors( abtBuff, ( btSector * 8 ) + FAT + 1, 8 ) )
 		{
 			{
-				sprintf( m_szLastError, "DOS3: Corrupted file '%s'\n%s\n", szOutFile, m_pDisk->GetLastError() );
+				sprintf( m_szLastError, "DOS3: Corrupted file '%.256s'\n%.256s\n", szOutFile, m_pDisk->GetLastError() );
 				return FALSE;
 			}
 		}
@@ -185,7 +185,7 @@ BOOL CDos3::ExportFile( char* szOutFile, CDirEntry* pDirE )
 		{
 			if ( btSector >= 0xFD )
 			{
-				sprintf( m_szLastError, "DOS3: Corrupted file '%s' (unexpected EOF)", szOutFile );
+				sprintf( m_szLastError, "DOS3: Corrupted file '%.256s' (unexpected EOF)", szOutFile );
 				return FALSE;
 			}
 
@@ -194,7 +194,7 @@ BOOL CDos3::ExportFile( char* szOutFile, CDirEntry* pDirE )
 		{
 			if ( btSector != 0xFD )
 			{
-				sprintf( m_szLastError, "DOS3: Corrupted file '%s' (missed EOF) %02X", szOutFile, btSector );
+				sprintf( m_szLastError, "DOS3: Corrupted file '%.256s' (missed EOF) %02X", szOutFile, btSector );
 				return FALSE;
 			}
 

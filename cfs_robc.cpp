@@ -65,7 +65,7 @@ BOOL CRobc::Mount( ADisk* pDisk )
 
 	if ( !m_pDisk->ReadSectors( abtSec, 0x02, 3 ) )
 	{
-			sprintf( m_szLastError, "ROBC: Can't read directory because\n%s", m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "ROBC: Can't read directory because\n%.256s", m_pDisk->GetLastError() );
 			return FALSE;
 	}
 
@@ -139,7 +139,7 @@ CRobcDirEntry* CRobc::CreateEntry( BYTE btSecCount, WORD wStartSec, BYTE* btName
 	memcpy( szTemp, btName, ROBC_MAX_NAME - 2 );
 	szTemp[ ROBC_MAX_NAME - 2 ] = '\0';
 
-	//printf( "%s\n", szTemp );
+	//printf( "%.256s\n", szTemp );
 
 	char* szT = szTemp;
 
@@ -152,7 +152,7 @@ CRobcDirEntry* CRobc::CreateEntry( BYTE btSecCount, WORD wStartSec, BYTE* btName
 
 	GuessBestFnameFromAtari( pE->m_szFname, szTemp, "atr" );
 
-	//printf( "%s\n", pE->m_szFname );
+	//printf( "%.256s\n", pE->m_szFname );
 
 	if ( ExportFile( NULL, pE ) )
 		m_iFilesValid++;
@@ -171,7 +171,7 @@ BOOL CRobc::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( ( iStartSec + iSecCount - 1 ) > m_pDisk->GetSectorCount() )
 	{
-		sprintf( m_szLastError, "ROBC: File '%s' goes past last sector!", szOutFile );
+		sprintf( m_szLastError, "ROBC: File '%.256s' goes past last sector!", szOutFile );
 		return FALSE;
 	}
 
@@ -179,7 +179,7 @@ BOOL CRobc::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( abtBuff[ 1 ] != iSecCount )
 	{
-		sprintf( m_szLastError, "ROBC: File '%s' Mismatched length (%d<>%d)!", szOutFile, abtBuff[ 1 ], iSecCount );
+		sprintf( m_szLastError, "ROBC: File '%.256s' Mismatched length (%d<>%d)!", szOutFile, abtBuff[ 1 ], iSecCount );
 		return FALSE;
 	}
 
@@ -197,7 +197,7 @@ BOOL CRobc::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( !newdisk.Format( &dg ) )
 	{
-		sprintf( m_szLastError, "ROBC: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+		sprintf( m_szLastError, "ROBC: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 		return FALSE;
 	}
 
@@ -207,13 +207,13 @@ BOOL CRobc::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if( !m_pDisk->ReadSector( abtBuff, iStartSec++ ) )
 		{
-			sprintf( m_szLastError, "ROBC: File '%s' can't create because\n%s", szOutFile, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "ROBC: File '%.256s' can't create because\n%.256s", szOutFile, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
 		if ( !newdisk.WriteSector( iCurrSec++, abtBuff ) )
 		{
-			sprintf( m_szLastError, "ROBC: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+			sprintf( m_szLastError, "ROBC: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 			return FALSE;
 		}
 
@@ -222,7 +222,7 @@ BOOL CRobc::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( !newdisk.Save( szOutFile, FALSE ) )
 	{
-		sprintf( m_szLastError, "ROBC: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+		sprintf( m_szLastError, "ROBC: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 		return FALSE;
 	}
 

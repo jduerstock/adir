@@ -90,7 +90,7 @@ BOOL CBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( !newdisk.Format( &dg ) )
 	{
-		sprintf( m_szLastError, "BOOT: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+		sprintf( m_szLastError, "BOOT: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 		return FALSE;
 	}
 
@@ -103,13 +103,13 @@ BOOL CBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 	{
 		if( !m_pDisk->ReadSector( abtBuff, iStartSec++ ) )
 		{
-			sprintf( m_szLastError, "BOOT: File '%s' can't create because\n%s", szOutFile, m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "BOOT: File '%.256s' can't create because\n%.256s", szOutFile, m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
 		if ( !newdisk.WriteSector( iCurrSec++, abtBuff ) )
 		{
-			sprintf( m_szLastError, "BOOT: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+			sprintf( m_szLastError, "BOOT: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 			return FALSE;
 		}
 
@@ -118,7 +118,7 @@ BOOL CBoot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 	if ( !newdisk.Save( szOutFile, FALSE ) )
 	{
-		sprintf( m_szLastError, "BOOT: File '%s' can't create because\n%s", szOutFile, newdisk.GetLastError() );
+		sprintf( m_szLastError, "BOOT: File '%.256s' can't create because\n%.256s", szOutFile, newdisk.GetLastError() );
 		return FALSE;
 	}
 

@@ -65,7 +65,7 @@ CBas2BootDirEntry* CBas2Boot::CreateEntry()
 
 	if ( !m_pDisk->ReadSector( abtSec, 1 ) )
 	{								
-		sprintf( m_szLastError, "BAS2BOOT: Can't read boot sector because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "BAS2BOOT: Can't read boot sector because\n%.256s", m_pDisk->GetLastError() );
 		delete pE;
 		return NULL;
 	}
@@ -74,7 +74,7 @@ CBas2BootDirEntry* CBas2Boot::CreateEntry()
 
 	if ( !m_pDisk->ReadSector( abtSec, 2 ) )
 	{
-		sprintf( m_szLastError, "BAS2BOOT: Can't read boot sector because\n%s", m_pDisk->GetLastError() );
+		sprintf( m_szLastError, "BAS2BOOT: Can't read boot sector because\n%.256s", m_pDisk->GetLastError() );
 		delete pE;
 		return NULL;
 	}
@@ -115,7 +115,7 @@ BOOL CBas2Boot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( -1 == hOutfile )
 		{
-			sprintf( m_szLastError, "BAS2BOOT: Unable to create file '%s'!", szOutFile );
+			sprintf( m_szLastError, "BAS2BOOT: Unable to create file '%.256s'!", szOutFile );
 			return FALSE;
 		}
 	}
@@ -140,7 +140,7 @@ BOOL CBas2Boot::ExportFile( char* szOutFile, CDirEntry* pDirE )
 
 		if ( !m_pDisk->ReadSector( abtBuff, iSector ) )
 		{
-			sprintf( m_szLastError, "BAS2BOOT: Can't read sector because\n%s", m_pDisk->GetLastError() );
+			sprintf( m_szLastError, "BAS2BOOT: Can't read sector because\n%.256s", m_pDisk->GetLastError() );
 			return FALSE;
 		}
 
