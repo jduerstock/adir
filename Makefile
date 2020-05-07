@@ -6,6 +6,7 @@ DELTREE = rm -rf
 #DELTREE = deltree /y
 
 release:
+#	@$(MAKE) $(PRGNAME) CFLAGS="-c -O2 -Wall -D_MEMORY_DUMP_" LDFLAGS=""
 	@$(MAKE) $(PRGNAME) CFLAGS="-c -O2 -Wall" LDFLAGS=""
 	@echo RELEASE: Compiled.
 
@@ -30,7 +31,7 @@ clean:
 
 #=====================================================================
 INCLUDES =				\
-		makefile		\
+		Makefile		\
 		adsk.h		\
 		cdsk.h          \
 		adsk_atr.h	\

@@ -21,7 +21,7 @@
 CDosS::CDosS() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CDosS constructed: %08X\n", this );
+		printf( "CDosS constructed: %pn", this );
 	#endif
 }
 
@@ -29,7 +29,7 @@ CDosS::~CDosS()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CDosS destructed: %08X\n", this );
+		printf( "CDosS destructed: %p\n", this );
 	#endif
 }
 

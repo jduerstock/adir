@@ -22,7 +22,7 @@
 CDos3::CDos3() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CDos3 constructed: %08X\n", this );
+		printf( "CDos3 constructed: %p\n", this );
 	#endif
 }
 
@@ -30,7 +30,7 @@ CDos3::~CDos3()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CDos3 destructed: %08X\n", this );
+		printf( "CDos3 destructed: %pXn", this );
 	#endif
 }
 

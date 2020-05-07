@@ -22,7 +22,7 @@
 CRobc::CRobc() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CRobc constructed: %08X\n", this );
+		printf( "CRobc constructed: %p\n", this );
 	#endif
 }
 
@@ -30,7 +30,7 @@ CRobc::~CRobc()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CRobc destructed: %08X\n", this );
+		printf( "CRobc destructed: %p\n", this );
 	#endif
 }
 

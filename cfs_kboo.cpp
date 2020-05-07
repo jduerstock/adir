@@ -19,7 +19,7 @@
 CKBoot::CKBoot() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CKBoot constructed: %08X\n", this );
+		printf( "CKBoot constructed: %p\n", this );
 	#endif
 }
 
@@ -27,7 +27,7 @@ CKBoot::~CKBoot()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CKBoot destructed: %08X\n", this );
+		printf( "CKBoot destructed: %p\n", this );
 	#endif
 }
 

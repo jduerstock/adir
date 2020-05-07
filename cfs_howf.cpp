@@ -23,7 +23,7 @@
 CHowf::CHowf() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CHowf constructed: %08X\n", this );
+		printf( "CHowf constructed: %p\n", this );
 	#endif
 }
 
@@ -31,7 +31,7 @@ CHowf::~CHowf()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CHowf destructed: %08X\n", this );
+		printf( "CHowf destructed: %p\n", this );
 	#endif
 }
 

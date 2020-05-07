@@ -25,28 +25,28 @@ CDirEntry::CDirEntry()
 	m_pPrev = NULL;
 
 	#ifdef _MEMORY_DUMP_
-		printf( "CDirEntry constructed: %08X\n", this );
+		printf( "CDirEntry constructed: %p\n", this );
 	#endif
 }
 
 CDirEntry::~CDirEntry()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CDirEntry destructed: %08X\n", this );
+		printf( "CDirEntry destructed: %p\n", this );
 	#endif
 }
 
 CFs::CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CFs constructed: %08X\n", this );
+		printf( "CFs constructed: %p\n", this );
 	#endif
 }
 
 CFs::~CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CFs destructed: %08X\n", this );
+		printf( "CFs destructed: %p\n", this );
 	#endif
 }
 

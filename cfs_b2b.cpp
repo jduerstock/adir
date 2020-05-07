@@ -19,7 +19,7 @@
 CBas2Boot::CBas2Boot() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CBas2Boot constructed: %08X\n", this );
+		printf( "CBas2Boot constructed: %p\n", this );
 	#endif
 }
 
@@ -27,7 +27,7 @@ CBas2Boot::~CBas2Boot()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CBas2Boot destructed: %08X\n", this );
+		printf( "CBas2Boot destructed: %p\n", this );
 	#endif
 }
 

@@ -20,7 +20,7 @@
 CBoot::CBoot() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CBoot constructed: %08X\n", this );
+		printf( "CBoot constructed: %p\n", this );
 	#endif
 }
 
@@ -28,7 +28,7 @@ CBoot::~CBoot()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CBoot destructed: %08X\n", this );
+		printf( "CBoot destructed: %p\n", this );
 	#endif
 }
 

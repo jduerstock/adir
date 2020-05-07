@@ -22,7 +22,7 @@
 CJonw::CJonw() : CFs()
 {
 	#ifdef _MEMORY_DUMP_
-		printf( "CJonw constructed: %08X\n", this );
+		printf( "CJonw constructed: %p\n", this );
 	#endif
 }
 
@@ -30,7 +30,7 @@ CJonw::~CJonw()
 {
 	Dismount();
 	#ifdef _MEMORY_DUMP_
-		printf( "CJonw destructed: %08X\n", this );
+		printf( "CJonw destructed: %p\n", this );
 	#endif
 }
 

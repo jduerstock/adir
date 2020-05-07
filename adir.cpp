@@ -56,7 +56,7 @@ const char* GetFSName( DOS_TYPE dostype );
 
 BOOL g_bIsMyDos = FALSE;
 BOOL g_bToLower = FALSE;
-BOOL g_bVerbose = FALSE;
+BOOL g_bVerbose = TRUE;
 BOOL g_bListOnly = TRUE;
 BOOL g_bRepairAuto = TRUE;
 
