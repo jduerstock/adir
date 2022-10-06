@@ -86,7 +86,20 @@ BOOL CDisk::Format( DISK_GEOMETRY* pgeo )
 BOOL CDisk::ReadSector( void* pBuf, int iStartSec )
 {
 	if ( iStartSec && ( iStartSec <= m_geometry.iSectors ) )
-		memcpy( pBuf, m_pbtMemory + ( iStartSec - 1 ) * m_geometry.iBytesPerSector, m_geometry.iBytesPerSector );
+	//Dufek: try to honor (return proper) size of first 3 sectors in 8 bit FDD Atari World
+	//because of (at least seen in) boot sector processing in filesystem type guessing ...
+	//where 3*128 !!! bytes is always allocated for boot area, even if next sectors are 256 bytes
+	//and this program is killed by malloc structure checks in glibc on modern compilers/runtimes !!!
+	//
+	//I see no problem with author's choice to store all sectors fullsize in working memory
+	//(WriteSector later here), but while reading, returned = copied size should be imho proper.
+	//
+	//AFAIK Atari works with first 3 sectors as 128 byte sectors always, although i saw some
+	//mutation of ATR files storing all sectors 256 bytes beforehand. Mostly seen ATR files
+	//and ATR software store first 3 sectors as 128 bytes and in CAtr::Load it is honored so ...
+	//and in XFD format probably (afaik) too ...
+	//Pavel Dufek, Czech Republic, 2022.
+		memcpy( pBuf, m_pbtMemory + ( iStartSec - 1 ) * m_geometry.iBytesPerSector, ( iStartSec <= 3 ) ? 0x80: m_geometry.iBytesPerSector );
 	else
 	{
 		sprintf( m_szLastError, "DISK: Reading non-existent sector: %04X", iStartSec );

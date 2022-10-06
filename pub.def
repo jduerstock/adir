@@ -14,12 +14,12 @@
 //
 
 #define PRG_NAME	"Adir"	
-#define PRG_VERSION	"0.67"
-#define PRG_COPYRIGHT	"1999-2001"
+#define PRG_VERSION	"0.67pd"
+#define PRG_COPYRIGHT	"1999-2001,revised till 2022"
 #define PRG_UNDERGPL	"1"
-#define PRG_AUTHOR	"Jindrich Kubec <kubecj@asw.cz>"
+#define PRG_AUTHOR	"Jindrich Kubec <kubecj@asw.cz>, Jason Duerstock, Pavel Dufek"
 
-#define PRG_URL 	"http://www.asw.cz/~kubecj"
+#define PRG_URL 	"former http://www.asw.cz/~kubecj"
 
 #define PRG_DESC	"Extracts files from Atari disk images."
 #define PRG_USAGE	"[options] sourcefile [mask]"
